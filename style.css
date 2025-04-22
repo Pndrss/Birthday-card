@@ -1,0 +1,242 @@
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+@import url(https://fonts.googleapis.com/css?family=Cutive+Mono);
+
+/* Variables */
+:root {
+  --font-size: 50px;
+  --shadow-size: 8px;
+  --color-bg: #27292a;
+}
+
+/* Base styles */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
+  box-sizing: border-box;
+}
+
+html * {
+  box-sizing: inherit;
+}
+
+*:before, *:after {
+  content: " ";
+}
+
+body {
+  overflow: hidden;
+  background-color: #456ddd;
+  perspective: 1000px;
+  color: #fff;
+  font-family: 'Cutive Mono', sans-serif;
+  margin: 0;
+  text-align: center;
+  position: relative;
+}
+
+/* Canvas styling */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -10;
+  width: 100%;
+  height: 100%;
+}
+
+/* Card styling */
+.card {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  margin-left: -175px;
+  width: 350px;
+  height: 470px;
+  transform-style: preserve-3d;
+  transition: all ease-in-out 1s;
+  box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+}
+
+.card .page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card .cover {
+  z-index: 2;
+  transform: rotateY(-20deg);
+  transition: transform ease-in-out 1.4s;
+  z-index: 5;
+}
+
+.card .cover .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #dd9445;
+  background-image: linear-gradient(135deg, #dd9445 0%, #e8b27a 100%);
+  z-index: 3;
+}
+
+.card .cover:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: right bottom;
+  background-color: rgba(246, 244, 244, 0.936);
+  transform: skew(-8deg) rotateX(-10deg);
+  z-index: -1;
+}
+
+.card .cover button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  cursor: pointer;
+  background: transparent;
+  border: 3px solid #fff;
+  color: #fff;
+  font-size: 20px;
+  padding: 0.5em 1.4em;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.card .cover button:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.card .cover button:focus {
+  outline: none;
+}
+
+.card .inside {
+  z-index: 1;
+  transform: rotateY(-8deg);
+}
+
+.card .inside .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg);
+  z-index: 3;
+}
+
+.card .inside:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: right bottom;
+  background-color: rgba(0,0,0,0.3);
+  transform: skew(-8deg) rotateX(-10deg);
+  z-index: -1;
+}
+
+.card.open {
+  margin-left: 0;
+}
+
+.card.open .cover {
+  transform: rotateY(-175deg);
+}
+
+/* Text positioning */
+.t-text {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+}
+
+.b-text {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+}
+
+/* Name styling - Plain white instead of rainbow */
+.card .cover h1 {
+  font-family: 'Righteous', sans-serif;
+  font-size: var(--font-size);
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  margin-top: 150px;
+}
+
+/* Birthday heading styling */
+.hb {
+    margin-top: 150px;
+    color: white;
+    font-family: 'Righteous', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    position: relative;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+
+/* Animation */
+@keyframes depth {
+  50% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+}
+
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    background-color: red;
+    top: -20px;
+    animation: fall 5s linear infinite;
+    opacity: 0.8;
+  }
+  
+  .confetti:nth-child(2) { left: 20%; background-color: yellow; animation-delay: 0.5s; }
+  .confetti:nth-child(3) { left: 40%; background-color: blue; animation-delay: 1s; }
+  .confetti:nth-child(4) { left: 60%; background-color: green; animation-delay: 1.5s; }
+  .confetti:nth-child(5) { left: 80%; background-color: orange; animation-delay: 2s; }
+  .confetti:nth-child(6) { left: 10%; background-color: pink; animation-delay: 2.5s; }
+  .confetti:nth-child(7) { left: 30%; background-color: purple; animation-delay: 3s; }
+  .confetti:nth-child(8) { left: 50%; background-color: cyan; animation-delay: 3.5s; }
+  .confetti:nth-child(9) { left: 70%; background-color: lime; animation-delay: 4s; }
+  .confetti:nth-child(10){ left: 90%; background-color: gold; animation-delay: 4.5s; }
+  
+  @keyframes fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
